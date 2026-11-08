@@ -1,0 +1,90 @@
+/* =========================================================
+   OPEN (FREE) DOCUMENTS — badge and banner
+   Only the platform's own colors: sun yellow, primary blue, wash blue.
+   ========================================================= */
+
+/* ---------- "Gratuit" on the thumbnail ----------
+   Same shape and type as the length pill (.vid-duration), on the left,
+   in the sun yellow of the platform's highlights. */
+.vid-free-badge {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 1;
+  padding: 0.15rem 0.5rem;
+  border-radius: 8px;
+  background: var(--home-sun, #faca4b);
+  color: var(--home-ink, #1a2846);
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+/* ---------- Banner under an open document ---------- */
+.vid-free-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--home-border, #d4dfeb);
+  border-radius: var(--home-radius-md, 20px);
+  background: var(--home-wash-blue, #e5f0fc);
+}
+
+.vid-free-cta-text {
+  flex: 1 1 260px;
+  margin: 0;
+  color: var(--home-ink, #1a2846);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.vid-free-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.vid-free-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  background: var(--home-primary, #1a8cf0);
+  color: var(--home-primary-foreground, #f9fcff);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: filter 150ms ease;
+}
+
+.vid-free-cta-btn:hover {
+  filter: brightness(1.06);
+}
+
+.vid-free-cta-link {
+  color: var(--home-primary, #1a8cf0);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .vid-free-cta {
+    padding: 0.75rem 0.85rem;
+  }
+  .vid-free-cta-actions,
+  .vid-free-cta-btn {
+    width: 100%;
+  }
+  .vid-free-cta-actions {
+    justify-content: center;
+  }
+}

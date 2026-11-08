@@ -1,0 +1,339 @@
+/* =========================================================
+   CATALOG FILTER BAR — search + level + subject + type
+   Computers: [ 🔍 search ……………………… Rechercher ]
+              [ Niveau ▾ ] [ Matière ▾ ] [ Tout | Vidéos | PDF ]
+   Phones:    [ 🔍 search ……… → ]
+              [ Niveau ▾ ][ Matière ▾ ]
+              [ Tout | Vidéos | PDF ]
+   ========================================================= */
+
+/* Sticky only on computers: on a phone a 3-row bar would eat the screen. */
+.vid-filterbar.cat-filterbar {
+  position: relative;
+  top: auto;
+}
+
+@media (min-width: 768px) {
+  .vid-filterbar.cat-filterbar {
+    position: sticky;
+    top: var(--site-header-height, 0px);
+  }
+}
+
+/* ---------- Search ---------- */
+
+.cat-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 0 5px 0 0.95rem;
+  border: 2px solid var(--home-border, #d4dfeb);
+  border-radius: 999px;
+  background: var(--home-card, #ffffff);
+  box-sizing: border-box;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.cat-search:focus-within {
+  border-color: var(--home-primary, #1a8cf0);
+  box-shadow: 0 0 0 4px rgba(15, 107, 184, 0.12);
+}
+
+.cat-search-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.cat-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 0.35rem;
+  border: none;
+  background: transparent;
+  color: var(--home-ink, #1a2846);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cat-search-input::placeholder {
+  color: var(--home-muted, #5b6b85);
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* Hide the browser's own clear (×) and search decorations — we have ours. */
+.cat-search-input::-webkit-search-cancel-button,
+.cat-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cat-search-clear {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #f1f4f8;
+  color: var(--home-muted, #5b6b85);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.cat-search-clear:hover {
+  background: var(--home-wash-blue, #e5f0fc);
+  color: var(--home-ink, #1a2846);
+}
+
+.cat-search-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 1.25rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--home-primary, #1a8cf0);
+  color: var(--home-primary-foreground, #f9fcff);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.cat-search-btn:hover {
+  filter: brightness(1.06);
+}
+
+.cat-search-btn:active {
+  transform: scale(0.97);
+}
+
+.cat-search-btn:focus-visible {
+  outline: 3px solid var(--home-primary, #1a8cf0);
+  outline-offset: 2px;
+}
+
+.cat-search-btn-icon {
+  display: none;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* ---------- Level / subject / type row ---------- */
+
+.cat-filter-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.cat-select {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat-select-grade,
+.cat-select-active {
+  border-color: var(--home-primary, #1a8cf0);
+}
+
+.vid-type-toggle.cat-type-toggle {
+  min-width: 0;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.cat-type-toggle .vid-type-option {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 601px) {
+  .vid-type-toggle.cat-type-toggle {
+    min-width: 300px;
+  }
+}
+
+/* ---------- Tous les documents / Gratuits ----------
+   Second line, on the left: two separate buttons with the same height, font
+   and borders as the dropdowns. A small round marker shows the selected one
+   (filled = selected), like a radio button. */
+.cat-access {
+  grid-column: 1 / -1;
+  order: 99; /* always the last line, under Tout / Vidéos / PDF on phones too */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cat-access-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 1.1rem 0 0.9rem;
+  border: 2px solid var(--home-border, #d4dfeb);
+  border-radius: 999px;
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink, #1a2846);
+  font: inherit;
+  font-size: 0.88rem; /* same as the dropdowns */
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+}
+
+.cat-access-option::before {
+  content: "";
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--home-border, #d4dfeb);
+  border-radius: 50%;
+  background: var(--home-card, #ffffff);
+  box-sizing: border-box;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.cat-access-option:hover:not(.cat-access-option-active) {
+  border-color: var(--home-primary, #1a8cf0);
+}
+
+.cat-access-option:focus-visible {
+  outline: 3px solid var(--home-primary, #1a8cf0);
+  outline-offset: 2px;
+}
+
+.cat-access-option-active {
+  border-color: var(--home-primary, #1a8cf0);
+  background: var(--home-wash-blue, #e5f0fc);
+  color: var(--home-primary, #1a8cf0);
+}
+
+.cat-access-option-active::before {
+  border-color: var(--home-primary, #1a8cf0);
+  background: var(--home-primary, #1a8cf0);
+  box-shadow: inset 0 0 0 2px var(--home-card, #ffffff);
+}
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 600px) {
+  .cat-search {
+    height: 48px;
+    padding-left: 0.8rem;
+  }
+
+  .cat-search-input {
+    font-size: 16px; /* ≥16px: iOS doesn't zoom into the field */
+  }
+
+  /* Button becomes a round → so the field keeps its width */
+  .cat-search-btn {
+    width: 38px;
+    padding: 0;
+  }
+
+  .cat-search-btn-label {
+    display: none;
+  }
+
+  .cat-search-btn-icon {
+    display: inline;
+  }
+
+  .cat-filter-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .vid-type-toggle.cat-type-toggle {
+    grid-column: 1 / -1;
+  }
+
+  /* Same height and text size as the dropdowns on phones; each button keeps
+     the width of its label, so "Tous les documents" is never cut. */
+  .cat-access-option {
+    height: 42px;
+    padding: 0 0.8rem 0 0.65rem;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+  }
+
+  .cat-select {
+    height: 42px;
+    padding-left: 0.85rem;
+    padding-right: 2rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* ---------- Results header while searching ---------- */
+
+.cat-results-scope {
+  color: var(--home-muted, #5b6b85);
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+/* ---------- Embedded catalog (teacher profile) ---------- */
+
+.cat-embedded {
+  padding-top: 0.5rem;
+}
+
+.cat-embedded-title {
+  margin: 1.75rem 0 0.75rem;
+  font-family: var(--home-font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--home-ink, #1a2846);
+}
+
+/* Inside a profile page the filter bar is a card, not a sticky full-width band. */
+.vid-filterbar.cat-filterbar.cat-filterbar-embedded,
+.vid-filterbar.cat-filterbar.cat-filterbar-embedded {
+  position: relative;
+  top: auto;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.cat-filterbar-embedded .vid-filterbar-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.cat-filterbar-embedded .vid-filterbar-inner > * {
+  min-width: 0;
+}
+
+.cat-embedded .vid-body {
+  padding-top: 1.5rem;
+}

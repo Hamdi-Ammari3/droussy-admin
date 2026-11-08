@@ -1,0 +1,1175 @@
+/* =========================================================
+   VIDEOS PAGE — filter bar + grid catalog
+   Uses the same design tokens as homePage.css / enseignantPage.css
+   ========================================================= */
+
+.vid-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .vid-container {
+    padding: 0 1rem;
+  }
+}
+
+.vid-body {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* ---------- Hero ---------- */
+
+.vid-hero {
+  padding: 2.5rem 0 1.5rem;
+  background: linear-gradient(160deg, var(--home-wash-blue, #e5f0fc) 0%, var(--home-bg, #f8fbff) 75%);
+}
+
+.vid-eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--home-primary);
+}
+
+.vid-title {
+  margin: 0.3rem 0 0;
+  font-family: var(--home-font-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--home-ink);
+}
+
+.vid-subtitle {
+  margin: 0.5rem 0 0;
+  font-weight: 600;
+  color: var(--home-muted);
+}
+
+/* ---------- Sticky filter bar ----------
+   If your site header is sticky, set its height on :root, e.g.
+   :root { --site-header-height: 66px; }  */
+
+.vid-filterbar {
+  position: sticky;
+  top: var(--site-header-height, 0px);
+  z-index: 30;
+  border-top: 2px solid var(--home-border, #d4dfeb);
+  border-bottom: 2px solid var(--home-border, #d4dfeb);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.vid-filterbar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.vid-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vid-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0.55rem 2.2rem 0.55rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background-color: var(--home-card, #ffffff);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a2846' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  color: var(--home-ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.vid-select:focus {
+  border-color: var(--home-primary);
+  box-shadow: 0 0 0 4px rgba(15, 107, 184, 0.12);
+}
+
+.vid-select-grade {
+  border-color: var(--home-primary);
+  max-width: 100%;
+}
+
+/* ---------- Tout / Vidéos / PDF ---------- */
+
+.vid-type-toggle {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-bg, #f8fbff);
+}
+
+.vid-type-option {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--home-muted);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.vid-type-option:hover:not(.vid-type-option-active) {
+  color: var(--home-ink);
+}
+
+.vid-type-option:focus-visible {
+  outline: 2px solid var(--home-primary);
+  outline-offset: 2px;
+}
+
+.vid-type-option-active {
+  background: var(--home-primary);
+  color: var(--home-primary-foreground, #f9fcff);
+}
+
+.vid-type-count {
+  font-size: 0.75em;
+  opacity: 0.65;
+}
+
+@media (min-width: 601px) {
+  .vid-type-toggle {
+    flex: 0 1 auto;
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .vid-select-grade {
+    flex: 1 1 60%;
+  }
+
+  .vid-select-sort {
+    flex: 0 0 auto;
+  }
+
+  .vid-type-toggle {
+    order: 3;
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- Chips ---------- */
+
+.vid-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: 0.15rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vid-chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.vid-chip-label {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--home-muted);
+}
+
+.vid-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink);
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.vid-chip:hover {
+  background: var(--home-wash-blue, #e5f0fc);
+}
+
+.vid-chip-sm {
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+}
+
+.vid-chip-active,
+.vid-chip-active:hover {
+  border-color: var(--home-primary);
+  background: var(--home-primary);
+  color: var(--home-primary-foreground, #f9fcff);
+}
+
+.vid-chip-count {
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+
+/* ---------- Banners ---------- */
+
+.vid-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.15rem 1.35rem;
+  border-radius: var(--home-radius-2xl, 28px);
+  border: 2px solid var(--home-border);
+  background: var(--home-sun, #faca4b);
+  color: var(--home-ink, #1a2846);
+}
+
+.vid-banner-emoji {
+  font-size: 2.2rem;
+}
+
+.vid-banner-text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.vid-banner-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.vid-banner-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* ---------- Buttons ---------- */
+
+.vid-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--home-primary);
+  color: var(--home-primary-foreground, #f9fcff);
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 150ms ease;
+}
+
+.vid-btn-primary:hover {
+  transform: scale(1.04);
+}
+
+.vid-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink);
+  font-weight: 800;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.vid-btn-secondary:hover {
+  transform: scale(1.04);
+  border-color: var(--home-primary);
+}
+
+.vid-link-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--home-primary);
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- Results header ---------- */
+
+.vid-results-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.vid-results-title {
+  margin: 0;
+  font-family: var(--home-font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--home-ink);
+}
+
+.vid-results-accent {
+  color: var(--home-primary);
+}
+
+.vid-results-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--home-muted);
+}
+
+.vid-section-sub {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--home-muted);
+}
+
+.vid-error {
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--home-radius-md, 20px);
+  background: var(--home-coral, #ff8573);
+  color: var(--home-coral-foreground, #fffbfa);
+  font-weight: 800;
+}
+
+/* ---------- Empty states ---------- */
+
+.vid-empty {
+  padding: 2.75rem 1.5rem;
+  border-radius: var(--home-radius-2xl, 28px);
+  background: var(--home-secondary, #f7efd1);
+  text-align: center;
+}
+
+.vid-empty-emoji {
+  margin: 0;
+  font-size: 2.8rem;
+}
+
+.vid-empty-title {
+  margin: 0.5rem 0 0;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--home-secondary-foreground, #55310f);
+}
+
+.vid-empty-text {
+  margin: 0.35rem 0 0;
+  font-weight: 600;
+  color: var(--home-secondary-foreground, #55310f);
+}
+
+/* ---------- Grid ---------- */
+
+.vid-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem 1.25rem;
+}
+
+@media (min-width: 560px) {
+  .vid-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .vid-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .vid-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.vid-more {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.vid-more-count {
+  margin: 0.5rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--home-muted);
+}
+
+/* ---------- Explore other grades ---------- */
+
+.vid-explore {
+  margin-top: 4rem;
+}
+
+.vid-explore-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .vid-explore-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .vid-explore-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.vid-explore-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.9rem 0.6rem;
+  border-radius: var(--home-radius-2xl, 28px);
+  border: 2px solid var(--home-border);
+  background: var(--home-card, #ffffff);
+  box-shadow: 0 4px 0 var(--home-border, #d4dfeb);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.vid-explore-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 var(--home-border, #d4dfeb);
+}
+
+.vid-explore-emoji {
+  font-size: 1.8rem;
+}
+
+.vid-explore-name {
+  font-weight: 800;
+  color: var(--home-ink);
+}
+
+.vid-explore-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--home-muted);
+}
+
+/* ---------- Video card ---------- */
+
+/* Card = fixed-height zones, so every card in a row lines up:
+   thumbnail (16:9) → title (always 2 lines) → teacher (1 line) → chips (1 line) */
+.vid-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.vid-thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--home-radius-md, 20px);
+  transition: transform 150ms ease;
+}
+
+.vid-card:hover .vid-thumb,
+.vid-card:focus-visible .vid-thumb {
+  transform: translateY(-4px);
+}
+
+.vid-card:focus-visible {
+  outline: 3px solid var(--home-primary);
+  outline-offset: 4px;
+  border-radius: var(--home-radius-md, 20px);
+}
+
+.vid-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vid-thumb-emoji {
+  font-size: 3.5rem;
+}
+
+.vid-thumb-sun {
+  background: var(--home-sun, #faca4b);
+}
+.vid-thumb-coral {
+  background: var(--home-coral, #ff8573);
+}
+.vid-thumb-sky {
+  background: var(--home-sky, #8cc8ff);
+}
+.vid-thumb-mint {
+  background: var(--home-mint, #73e0b4);
+}
+.vid-thumb-grape {
+  background: var(--home-grape, #c796eb);
+}
+
+.vid-duration {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 1;
+  padding: 0.15rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(26, 40, 70, 0.82);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.vid-play-overlay,
+.vid-locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.vid-play-overlay {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.vid-play-overlay span {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink);
+  font-size: 1.4rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.vid-card:hover .vid-play-overlay,
+.vid-card:focus-visible .vid-play-overlay {
+  opacity: 1;
+}
+
+.vid-locked-overlay {
+  background: rgba(26, 40, 70, 0.4);
+}
+
+.vid-locked-overlay span {
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.vid-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Title: ALWAYS reserves exactly 2 lines — short titles keep the space,
+   long ones are cut with "…" (full title shows on hover). */
+.vid-card-title {
+  --title-lh: 1.3;
+  margin: 0.6rem 0 0;
+  min-height: calc(var(--title-lh) * 2em);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: var(--title-lh);
+  color: var(--home-ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+/* Teacher: always exactly 1 line. */
+.vid-card-teacher {
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--home-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chips: always exactly 1 line, pinned to the bottom of the card.
+   Long chips shrink with "…" instead of wrapping to a 2nd line. */
+.vid-card-meta {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.3rem;
+  min-width: 0;
+  margin-top: auto;
+  padding-top: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.vid-chip-grade,
+.vid-chip-subject {
+  min-width: 0;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The grade/section chip shrinks first; the subject keeps its room. */
+.vid-chip-grade {
+  flex: 0 1 auto;
+  background: var(--home-wash-blue, #e5f0fc);
+  color: var(--home-primary-dark, #0f6bb8);
+}
+
+.vid-chip-subject {
+  flex: 0 0 auto;
+  max-width: 50%;
+  background: #f1f4f8;
+  color: var(--home-ink);
+}
+
+.vid-card-views {
+  flex-shrink: 0;
+  margin-left: auto;
+  white-space: nowrap;
+  color: var(--home-muted);
+}
+
+/* =========================================================
+   MODALS (player + locked)
+   ========================================================= */
+
+.vid-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(26, 40, 70, 0.55);
+  backdrop-filter: blur(3px);
+  animation: vid-fade-in 150ms ease;
+}
+
+.vid-modal {
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+  padding: 1.5rem;
+  border-radius: var(--home-radius-2xl, 28px);
+  background: var(--home-card, #ffffff);
+  border: 2px solid var(--home-border);
+  box-shadow: 0 24px 60px rgba(26, 40, 70, 0.3);
+  animation: vid-pop-in 180ms ease;
+}
+
+.vid-modal-sm {
+  max-width: 440px;
+}
+
+.vid-modal-md {
+  max-width: 560px;
+}
+
+.vid-modal-lg {
+  max-width: 880px;
+}
+
+@media (max-width: 480px) {
+  .vid-modal {
+    padding: 1.25rem 1rem;
+  }
+}
+
+@keyframes vid-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vid-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.vid-modal-close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.vid-modal-close:hover {
+  background: var(--home-wash-blue, #e5f0fc);
+}
+
+.vid-modal-title {
+  margin: 0;
+  font-family: var(--home-font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--home-ink);
+}
+
+.vid-modal-title-left {
+  padding-right: 2.75rem;
+  font-size: 1.2rem;
+}
+
+.vid-modal-desc {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--home-muted);
+}
+
+.vid-player {
+  position: relative;
+  margin-top: 1rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--home-radius-md, 20px);
+  background: #0e1628;
+}
+
+.vid-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.vid-player-msg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+}
+
+.vid-locked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.vid-locked-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 24px;
+  background: var(--home-sun, #faca4b);
+  font-size: 2.2rem;
+}
+
+.vid-locked-text {
+  margin: 0;
+  font-weight: 600;
+  color: var(--home-muted);
+  line-height: 1.5;
+}
+
+/* =========================================================
+   PDF — card badge + protected reader
+   ========================================================= */
+
+.vid-badge-pdff {
+  background: rgba(196, 44, 44, 0.92);
+}
+
+/* PDFs: 2nd line shows the document type (still exactly 1 line). */
+.vid-card-doctype {
+  color: var(--home-ink);
+  font-weight: 700;
+}
+
+/* Reader: tall window on desktop, full screen on phones. */
+.vid-modal-pdf {
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+  height: calc(100vh - 2rem);
+  height: calc(100dvh - 2rem);
+  overflow: hidden;
+}
+
+.vid-reader-title {
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vid-reader-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 2.75rem;
+}
+
+.vid-reader {
+  flex: 1;
+  min-height: 0;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .vid-modal-backdrop-pdf {
+    padding: 0;
+  }
+
+  .vid-modal-pdf {
+    max-width: none;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    padding: 0.75rem 0.5rem 0.5rem;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .vid-modal-pdf .vid-modal-close {
+    top: 0.6rem;
+    right: 0.6rem;
+  }
+
+  .vid-modal-pdf .vid-modal-title-left,
+  .vid-modal-pdf .vid-reader-desc {
+    padding-left: 0.4rem;
+  }
+
+  .vid-reader {
+    margin-top: 0.5rem;
+  }
+
+  .vid-reader .pdfv {
+    border-radius: 12px;
+  }
+}
+
+/* Teacher name in the player / PDF reader → his public profile */
+.vid-teacher-link {
+  color: var(--home-primary, #1a8cf0);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(26, 140, 240, 0.35);
+  transition: text-decoration-color 150ms ease;
+}
+
+.vid-teacher-link:hover,
+.vid-teacher-link:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+/* Teacher call-to-action at the bottom of the catalog (home page) */
+.vid-teacher-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 4rem;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--home-radius-2xl, 28px);
+  background: var(--home-grape, #c796eb);
+  color: var(--home-grape-foreground, #fdfbff);
+}
+
+.vid-teacher-cta-emoji {
+  font-size: 2.2rem;
+}
+
+.vid-teacher-cta-text {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.vid-teacher-cta-title {
+  margin: 0;
+  font-family: var(--home-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.vid-teacher-cta-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.vid-teacher-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: var(--home-mint, #73e0b4);
+  color: var(--home-mint-foreground, #003729);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 150ms ease;
+}
+
+.vid-teacher-cta-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Visitor login strip (compact, above the results) */
+.vid-login-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  padding: 0.65rem 0.75rem 0.65rem 1rem;
+  border-radius: var(--home-radius-md, 20px);
+  background: var(--home-sun, #faca4b);
+  color: var(--home-ink, #1a2846);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.vid-login-strip span {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.vid-login-strip-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  background: var(--home-primary);
+  color: var(--home-primary-foreground, #f9fcff);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Phones: a compact top so the first cards show without scrolling */
+@media (max-width: 600px) {
+  .vid-hero {
+    padding: 1.25rem 0 1rem;
+  }
+
+  .vid-eyebrow {
+    font-size: 0.75rem;
+  }
+
+  .vid-title {
+    font-size: 1.45rem;
+  }
+
+  .vid-subtitle {
+    margin-top: 0.35rem;
+    font-size: 0.82rem;
+  }
+
+  /* Level + sort on one row */
+  .vid-select-grade {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .vid-filterbar-inner {
+    gap: 0.5rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .vid-body {
+    padding-top: 1.25rem;
+  }
+
+  .vid-results-head {
+    margin-bottom: 0.8rem;
+  }
+
+  .vid-results-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Visitors (not logged in): no dark veil over the thumbnail, just a small
+   lock badge in the corner — the catalog should show what we offer. */
+.vid-locked-overlay.vid-locked-soft {
+  place-items: start end;
+  padding: 0.5rem;
+  background: none;
+}
+
+.vid-locked-overlay.vid-locked-soft span {
+  padding: 0.2rem 0.65rem;
+  font-size: 0.72rem;
+  box-shadow: 0 2px 8px rgba(26, 40, 70, 0.18);
+}
+
+/* ---------- Chip rows on computers: ‹ › arrows + fade at the cut edge ---------- */
+
+.vid-chip-scroller {
+  position: relative;
+  min-width: 0;
+}
+
+.vid-chip-arrow {
+  display: none; /* phones: swipe */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vid-chip-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    margin-top: -19px; /* row has 0.15rem bottom padding */
+    padding: 0;
+    border: 2px solid var(--home-border, #d4dfeb);
+    border-radius: 999px;
+    background: var(--home-card, #ffffff);
+    color: var(--home-ink, #1a2846);
+    font-size: 1.3rem;
+    font-weight: 800;
+    line-height: 1;
+    box-shadow: 0 2px 8px rgba(26, 40, 70, 0.15);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+  }
+
+  .vid-chip-arrow:hover {
+    background: var(--home-wash-blue, #e5f0fc);
+  }
+
+  .vid-chip-arrow-left {
+    left: 0;
+  }
+
+  .vid-chip-arrow-right {
+    right: 0;
+  }
+
+  /* Fade the chips under the arrows so the cut looks intentional */
+  .vid-chip-scroller-left .vid-chip-row {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px);
+    mask-image: linear-gradient(to right, transparent 0, #000 56px);
+  }
+
+  .vid-chip-scroller-right .vid-chip-row {
+    -webkit-mask-image: linear-gradient(to left, transparent 0, #000 56px);
+    mask-image: linear-gradient(to left, transparent 0, #000 56px);
+  }
+
+  .vid-chip-scroller-left.vid-chip-scroller-right .vid-chip-row {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 56px, #000 calc(100% - 56px), transparent 100%);
+  }
+}

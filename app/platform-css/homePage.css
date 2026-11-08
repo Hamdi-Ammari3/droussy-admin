@@ -1,0 +1,679 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap");
+
+/* =========================================================
+   DESIGN TOKENS — converted 1:1 from the Lovable OKLCH values
+   to hex, so the palette matches exactly. These are the SAME
+   --home-* variable names already used across grade-page-styles.css
+   and subjectStyle.css (with var(--home-primary, #2f6fed) fallbacks),
+   so updating the values here re-themes the whole app consistently.
+   ========================================================= */
+:root {
+  --home-bg: #fdfaf0;
+  --home-ink: #1a2846;
+  --home-muted: #606c84;
+  --home-primary: #188ceb;
+  --home-primary-dark: #0f6bb8;
+  --home-primary-foreground: #f9fcff;
+
+  --home-secondary: #f7efd1;
+  --home-secondary-foreground: #55310f;
+
+  --home-accent: #94f2eb;
+  --home-accent-foreground: #00353c;
+
+  --home-sun: #faca4b;
+  --home-sun-foreground: #492b00;
+
+  --home-coral: #ff8573;
+  --home-coral-foreground: #fffbfa;
+
+  --home-sky: #5cc9f9;
+  --home-sky-foreground: #002a4e;
+
+  --home-mint: #73e0b4;
+  --home-mint-foreground: #003729;
+
+  --home-grape: #c796eb;
+  --home-grape-foreground: #fdfbff;
+
+  --home-wash-blue: #e5f0fc;
+  --home-wash-coral: #fff1ec;
+
+  --home-border: #d4dfeb;
+  --home-card: #ffffff;
+
+  --home-radius-sm: 14px;
+  --home-radius-md: 20px;
+  --home-radius-lg: 28px;
+  --home-radius-2xl: 28px;
+  --home-radius-3xl: 32px;
+  --home-radius-4xl: 36px;
+
+  --home-font-display: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --home-font-sans: "Nunito", system-ui, sans-serif;
+
+  --home-gradient-hero: linear-gradient(160deg, #cceeff 0%, #ddffeb 45%, #fff6d1 100%);
+  --home-shadow-pop: 0 10px 0 -4px color-mix(in oklab, var(--home-primary) 22%, transparent),
+    0 18px 40px -18px rgba(50, 70, 115, 0.45);
+}
+
+.home-page {
+  background: var(--home-bg);
+  color: var(--home-ink);
+  font-family: var(--home-font-sans);
+  padding-bottom: 4rem;
+}
+
+.home-page h1,
+.home-page h2,
+.home-page h3 {
+  font-family: var(--home-font-display);
+  letter-spacing: -0.01em;
+}
+
+.loading-page {
+  background: var(--home-bg);
+  color: var(--home-ink);
+  font-family: var(--home-font-sans);
+  height: 85vh;
+}
+
+/* =========================================================
+   HERO — gradient background, badge, title, two service cards
+   ========================================================= */
+
+.home-hero {
+  background-image: var(--home-gradient-hero);
+}
+
+.home-hero-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.home-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--home-card);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--home-primary);
+}
+
+.home-hero-title {
+  margin: 1.25rem 0 0.75rem;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.home-hero-title em {
+  font-style: normal;
+  color: var(--home-primary);
+}
+
+.home-hero-sub {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--home-muted);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.home-hero-cards {
+  max-width: 760px;
+  margin: 2.5rem auto 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.home-service-card {
+  display: block;
+  text-align: center;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--home-radius-2xl);
+  background-color: var(--home-card);
+  border: 2px solid var(--home-border);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.home-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--home-shadow-pop);
+}
+
+.home-service-icon {
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--home-radius-3xl);
+  font-size: 2.5rem;
+}
+
+.home-service-icon-sky { background: var(--home-sky); }
+.home-service-icon-sun { background: var(--home-sun); }
+
+.home-service-title {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.home-service-text {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--home-muted);
+}
+
+.home-service-cta {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.home-service-cta-primary {
+  background: var(--home-primary);
+  color: var(--home-primary-foreground);
+}
+
+.home-service-cta-coral {
+  background: var(--home-coral);
+  color: var(--home-coral-foreground);
+}
+
+/* =========================================================
+   CALENDAR — "Mon mois d'apprentissage"
+   ========================================================= */
+
+.home-calendar-section {
+  max-width: 900px;
+  margin: 3.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.home-section-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.home-section-sub {
+  margin-top: 0.4rem;
+  color: var(--home-muted);
+  font-weight: 600;
+}
+
+.month-calendar {
+  background: var(--home-card);
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-2xl);
+  padding: 1.5rem;
+}
+
+.month-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.month-calendar-title {
+  font-family: var(--home-font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.month-calendar-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.month-calendar-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-card);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--home-ink);
+  transition: background 150ms ease, border-color 150ms ease;
+}
+
+.month-calendar-nav-btn:hover {
+  background: var(--home-wash-blue);
+  border-color: var(--home-primary);
+}
+
+.month-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+
+.month-calendar-weekday {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--home-muted);
+  text-transform: uppercase;
+  padding-bottom: 0.5rem;
+}
+
+.month-calendar-day {
+  aspect-ratio: auto;
+  min-height: 54px;
+  min-width: 0; 
+  padding: 0.3rem 0.15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  border-radius: var(--home-radius-sm, 14px);
+  background: var(--home-bg, #fdfaf0);
+}
+
+.month-calendar-day-number-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+ 
+.month-calendar-day-number {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.month-calendar-day-today-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--home-primary, #188ceb);
+  flex-shrink: 0;
+}
+
+.month-calendar-day-label {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 0.55rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--home-primary-dark, #0f6bb8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.month-calendar-day-empty {
+  background: transparent;
+}
+
+.month-calendar-day-event {
+  background: var(--home-wash-blue);
+  color: var(--home-primary-dark);
+}
+
+.month-calendar-empty-state {
+  margin-top: 1.5rem;
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: var(--home-radius-md);
+  background: var(--home-wash-blue);
+}
+
+.month-calendar-empty-state p {
+  color: var(--home-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.month-calendar-empty-state a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--home-primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* =========================================================
+   LEVELS & GRADES (unchanged structurally — now themed
+   automatically via the updated --home-* values above)
+   ========================================================= */
+
+.home-levels {
+  max-width: 1180px;
+  margin: 3.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.home-levels-header {
+  margin-bottom: 1.75rem;
+}
+
+.home-levels-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.home-levels-sub {
+  color: var(--home-muted);
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.home-level-block {
+  margin-bottom: 3rem;
+}
+
+.home-level-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border-radius: var(--home-radius-2xl);
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.home-wash-blue { background: var(--home-wash-blue); }
+.home-wash-coral { background: var(--home-wash-coral); }
+
+.home-level-banner-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 60%;
+}
+
+.home-level-name {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--home-ink);
+}
+
+.home-level-desc {
+  color: var(--home-muted);
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.home-level-count {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--home-primary-dark);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+}
+
+.home-level-banner-img {
+  width: 220px;
+  height: 140px;
+  object-fit: contain;
+  object-position: bottom;
+  flex-shrink: 0;
+}
+
+.home-grade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.home-grade-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--home-card);
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-md);
+  padding: 1.25rem 1.3rem 1.4rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-grade-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--home-shadow-pop);
+  border-color: var(--home-primary);
+}
+
+.home-grade-card-purchased {
+  border-color: var(--home-primary);
+  background: linear-gradient(180deg, #fff 0%, var(--home-wash-blue) 140%);
+}
+
+.home-grade-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.home-grade-name {
+  font-weight: 800;
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.home-badge {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.home-badge-purchased {
+  background: var(--home-primary);
+  color: #fff;
+}
+
+.home-badge-progress {
+  background: var(--home-wash-coral);
+  color: var(--home-coral);
+}
+
+.home-grade-card-progress {
+  margin-top: 0.9rem;
+}
+
+.home-grade-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--home-primary);
+  transition: gap 150ms ease;
+}
+
+.home-grade-card:hover .home-grade-cta {
+  gap: 0.5rem;
+}
+
+.home-grade-cta-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+/* =========================================================
+   BECOME A TEACHER
+   ========================================================= */
+
+.home-teacher-section {
+  max-width: 1024px;
+  margin: 3.5rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.home-teacher-card {
+  border-radius: var(--home-radius-4xl);
+  border: 2px solid var(--home-mint);
+  background: var(--home-mint);
+  color: var(--home-mint-foreground);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.home-teacher-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.home-teacher-text {
+  max-width: 620px;
+  margin: 0.75rem auto 0;
+  font-weight: 600;
+}
+
+.home-teacher-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.home-teacher-btn {
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 150ms ease;
+}
+
+.home-teacher-btn:hover {
+  transform: translateY(-2px);
+}
+
+.home-teacher-btn-primary {
+  background: var(--home-primary);
+  color: var(--home-primary-foreground);
+}
+
+.home-teacher-btn-outline {
+  background: var(--home-card);
+  border: 2px solid rgba(0, 55, 41, 0.25);
+  color: var(--home-mint-foreground);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .home-hero-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .home-level-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .home-level-banner-copy {
+    max-width: 100%;
+  }
+
+  .home-level-banner-img {
+    width: 100%;
+    height: 160px;
+  }
+
+  .month-calendar-day {
+    min-height: 46px;
+  }
+ 
+  .month-calendar-day-label {
+    font-size: 0.5rem;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.home-service-card:focus-visible,
+.home-grade-card:focus-visible,
+.home-teacher-btn:focus-visible,
+.month-calendar-nav-btn:focus-visible {
+  outline: 3px solid var(--home-primary);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   Calendar day cells — showing up to two distinct course labels
+   stacked, instead of compressing to one label + a count. Append to
+   the end of homePage.css so these win over the earlier rules.
+   ========================================================= */
+
+.month-calendar-day {
+  min-height: 66px;
+}
+
+.month-calendar-day-labels {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+}
+
+.month-calendar-day-label {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 0.52rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--home-primary-dark, #0f6bb8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.month-calendar-day-label-more {
+  color: var(--home-muted, #606c84);
+}
+
+@media (max-width: 480px) {
+  .month-calendar-day {
+    min-height: 58px;
+  }
+
+  .month-calendar-day-label {
+    font-size: 0.48rem;
+  }
+}

@@ -1,0 +1,195 @@
+/* =========================================================
+   Generated video thumbnail — platform colors, brand font.
+   Sizes scale with the card width (container queries), so it
+   looks the same on a phone carousel and a 4-column desktop grid.
+   ========================================================= */
+
+.vthumb {
+  --vt-color: var(--home-sky, #8cc8ff);
+  --vt-ink: var(--home-ink, #1a2846);
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 7% 7% 6%;
+  overflow: hidden;
+  container-type: inline-size;
+  color: var(--vt-ink);
+  text-align: start;
+
+  /* Solid color first (old browsers), then a soft gradient of the same color. */
+  background-color: var(--vt-color);
+  background-image:
+    radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.45) 0 14%, transparent 15%),
+    radial-gradient(circle at 12% 110%, rgba(255, 255, 255, 0.35) 0 26%, transparent 27%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.vthumb *,
+.vthumb *::before,
+.vthumb *::after {
+  box-sizing: border-box;
+}
+
+/* Big faded subject emoji in the background */
+.vthumb-watermark {
+  position: absolute;
+  right: -4%;
+  bottom: -10%;
+  font-size: 4.5rem;
+  line-height: 1;
+  opacity: 0.22;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Top row: type tag + subject pill */
+.vthumb-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 0.68rem;
+}
+
+/* "🎬 Vidéo" / "📄 PDF" — tells the two apart at first glance */
+.vthumb-type {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.25em 0.6em;
+  border-radius: 0.55em;
+  background: var(--home-card, #ffffff);
+  color: var(--home-ink, #1a2846);
+  font-size: 1.12em;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(26, 40, 70, 0.12);
+}
+
+.vthumb-type-pdf {
+  color: #a12626;
+}
+
+/* Image mode: the tag floats over the picture */
+.vthumb-type-float {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 1;
+  font-size: 0.72rem;
+}
+
+/* Subject pill (next to the type tag) */
+.vthumb-subject {
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.25em 0.7em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 1em;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.vthumb-subject-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vthumb-emoji {
+  flex-shrink: 0;
+  font-style: normal;
+}
+
+/* Lesson title — the part that makes every card unique */
+.vthumb-title {
+  position: relative;
+  margin: auto 0;
+  padding: 0.35em 0;
+  font-family: var(--home-font-display, inherit);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Footer: brand + grade (right side left free for the duration badge) */
+.vthumb-footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  max-width: 72%;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.vthumb-brand {
+  flex-shrink: 0;
+  font-family: var(--home-font-display, inherit);
+}
+
+.vthumb-brand-tn {
+  color: var(--home-primary, #1a8fe3);
+}
+
+.vthumb-grade {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.15em 0.55em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Scale everything with the card width where supported */
+@supports (font-size: 1cqw) {
+  .vthumb-watermark {
+    font-size: 34cqw;
+  }
+  .vthumb-top {
+    font-size: clamp(0.6rem, 4cqw, 0.9rem);
+  }
+  .vthumb-title {
+    font-size: clamp(0.95rem, 7.6cqw, 2rem);
+  }
+  .vthumb-title-md {
+    font-size: clamp(0.85rem, 6.4cqw, 1.7rem);
+  }
+  .vthumb-title-sm {
+    font-size: clamp(0.8rem, 5.4cqw, 1.45rem);
+  }
+  .vthumb-footer {
+    font-size: clamp(0.58rem, 3.7cqw, 0.85rem);
+  }
+}
+
+/* Image mode (THUMBNAIL_MODE = "image") */
+.vthumb-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,297 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--home-border, #d4dfeb);
+}
+
+.navbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.teacher-navbar {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.navbar-logo-badge {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--home-radius-md, 20px);
+  background: var(--home-sun, #faca4b);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.navbar-wordmark {
+  font-family: var(--home-font-display, "Baloo 2", system-ui, sans-serif);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--home-ink, #1a2846);
+  letter-spacing: -0.01em;
+}
+
+.navbar-brand-accent {
+  color: var(--home-primary, #188ceb);
+}
+
+/* Flattened into .navbar-inner's flex context (rather than being its
+   own nested flex container) — this lets every item inside, including
+   the logo, participate in one shared `order` scheme, which is what
+   makes the mobile two-row layout below possible without conditional
+   logic for guest vs. logged-in states. The <nav> element itself still
+   exists in the DOM for accessibility; display:contents only removes
+   its own box from layout, not the element. */
+.navbar-links {
+  display: contents;
+}
+
+/* Desktop: this zero-size element absorbs all the leftover space via
+   its own auto-margin, pushing itself (and everything positioned after
+   it, since nothing overrides `order` outside the mobile media query)
+   flush to the right — logo stays left, everything else ends up
+   right-aligned as a group.
+
+   Deliberately NOT using a ":first-child" selector on the links
+   themselves to achieve this: this row-break span is the actual first
+   child inside <nav>, so a ":first-child" selector targeting
+   ".navbar-link" would never match anything (it's the second child,
+   not the first) — that was the exact bug this replaces. */
+.navbar-row-break {
+  flex-basis: 0;
+  width: 0;
+  height: 0;
+  margin-left: auto;
+  overflow: hidden;
+}
+
+.navbar-link {
+  font-family: var(--home-font-sans, "Nunito", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--home-ink, #1a2846);
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  transition: background 150ms ease, color 150ms ease;
+  white-space: nowrap;
+}
+
+.navbar-link:hover {
+  background: var(--home-wash-blue, #e5f0fc);
+}
+
+.navbar-link-active {
+  background: var(--home-primary, #188ceb);
+  color: var(--home-primary-foreground, #f9fcff);
+}
+
+.navbar-link-active:hover {
+  background: var(--home-primary, #188ceb);
+}
+
+.navbar-login-btn {
+  margin-left: 0.25rem;
+  background: var(--home-primary, #188ceb);
+  color: var(--home-primary-foreground, #f9fcff);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.navbar-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24, 140, 235, 0.28);
+}
+
+/* ---------- Logged-in user chip ---------- */
+
+.navbar-user {
+  position: relative;
+  margin-left: 0.25rem;
+}
+
+.navbar-user-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--home-mint, #73e0b4);
+  color: var(--home-mint-foreground, #003729);
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.45rem 1rem 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  max-width: 160px;
+  transition: transform 150ms ease;
+  text-decoration: none;
+}
+
+.navbar-user-chip:hover {
+  transform: translateY(-2px);
+}
+
+.navbar-user-chip-active {
+  box-shadow: 0 0 0 2px var(--home-primary, #188ceb);
+}
+
+.navbar-user-chip-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navbar-menu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  min-width: 200px;
+  background: var(--home-card, #ffffff);
+  border: 2px solid var(--home-border, #d4dfeb);
+  border-radius: var(--home-radius-md, 20px);
+  box-shadow: 0 18px 40px -18px rgba(50, 70, 115, 0.45);
+  padding: 0.75rem;
+  z-index: 50;
+}
+
+.navbar-menu-info {
+  padding: 0.4rem 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--home-border, #d4dfeb);
+  margin-bottom: 0.5rem;
+}
+
+.navbar-menu-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--home-ink, #1a2846);
+  margin: 0;
+}
+
+.navbar-menu-name:last-child {
+  color: var(--home-muted, #606c84);
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.navbar-menu-logout {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.6rem;
+  border-radius: var(--home-radius-sm, 14px);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--home-coral, #ff8573);
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.navbar-menu-logout:hover {
+  background: var(--home-wash-coral, #fff1ec);
+}
+
+/* ---------- Small-screen tuning ---------- */
+
+.navbar-teacher-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--home-muted, #606c84);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+.navbar-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 2px solid var(--home-border, #d4dfeb);
+  background: var(--home-card, #ffffff);
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--home-ink, #1a2846);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.navbar-logout-btn:hover {
+  background: var(--home-wash-blue, #e5f0fc);
+}
+
+@media (max-width: 480px) {
+  .navbar-wordmark {
+    font-size: 1.15rem;
+  }
+
+  .navbar-link {
+    font-size: 0.82rem;
+    padding: 0.45rem 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-inner {
+    row-gap: 0.6rem;
+  }
+
+  .teacher-navbar {
+    flex-direction: row-reverse;
+  }
+
+  .navbar-brand {
+    order: 1;
+  }
+
+  .navbar-login-btn {
+    order: 2;
+    margin-left: auto;
+  }
+
+  /* At mobile the row-break's job is purely to force the line-wrap via
+     flex-basis:100% — it no longer needs to push anything right, since
+     row 1's alignment is handled by .navbar-login-btn's own auto-margin
+     and row 2 should stay left-aligned. */
+  .navbar-row-break {
+    flex-basis: 100%;
+    width: auto;
+    height: 0;
+    margin-left: 0;
+    order: 3;
+  }
+
+  .navbar-link {
+    order: 4;
+  }
+
+  .navbar-user-chip {
+    order: 5;
+    margin-left: 0;
+  }
+}

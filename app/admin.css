@@ -1,0 +1,299 @@
+/* =========================================================
+   Admin-only styles. Everything visual comes from the platform
+   tokens (--home-*, homePage.css) so the dashboard reads as
+   part of Droussy TN. Prefix: adm-
+   ========================================================= */
+
+body.adm-body {
+  margin: 0;
+  min-height: 100vh;
+  padding-bottom: 0;
+}
+* { box-sizing: border-box; }
+
+.navbar-links form { display: contents; }
+
+.adm-badge {
+  margin-left: 0.15rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--home-ink);
+  color: #fff;
+  font-family: var(--home-font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ---------- page header (same as teacher dashboard .ens-board) ---------- */
+.adm-back {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  color: var(--home-primary-dark);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+.adm-back:hover { text-decoration: underline; }
+
+/* 4 stat cards instead of 3 */
+.adm-stats-4 { grid-template-columns: 1fr; }
+@media (min-width: 720px) { .adm-stats-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .adm-stats-4 { grid-template-columns: repeat(4, 1fr); } }
+.ens-stat-card-sky { background: var(--home-wash-blue); border-color: var(--home-wash-blue); }
+.ens-stat-card-coral { background: var(--home-wash-coral); border-color: var(--home-wash-coral); }
+
+/* ---------- catalog filter bar inside the admin page ---------- */
+.adm-catalog .vid-filterbar.cat-filterbar { top: 66px; }
+.adm-catalog .vid-body { padding-top: 1.25rem; }
+
+/* status chip row (admin filter) */
+.adm-status-row { padding-top: 0.25rem; }
+
+/* ---------- cards: platform card + admin footer ---------- */
+.adm-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+a.vid-card { text-decoration: none; color: inherit; display: block; }
+.adm-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+  padding: 0 0.15rem;
+}
+.adm-card-foot .adm-grow { flex: 1; }
+.adm-card-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--home-muted);
+}
+.adm-chip-warn {
+  background: #fff4d6;
+  color: #8a5a00;
+}
+
+/* small pill buttons in the platform style */
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border-radius: 999px;
+  border: 2px solid var(--home-border);
+  background: var(--home-card);
+  color: var(--home-ink);
+  padding: 0.3rem 0.85rem;
+  font-family: var(--home-font-sans);
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.adm-btn:hover:not(:disabled) { background: var(--home-wash-blue); }
+.adm-btn:disabled { opacity: 0.55; cursor: default; }
+.adm-btn-publish { background: var(--home-mint); border-color: var(--home-mint); color: var(--home-mint-foreground); }
+.adm-btn-publish:hover:not(:disabled) { background: #5fd6a5; }
+.adm-btn-danger { color: #a12626; }
+.adm-btn-danger:hover:not(:disabled) { background: #fdecec; }
+.adm-btn-primary { background: var(--home-primary); border-color: var(--home-primary); color: var(--home-primary-foreground); }
+.adm-btn-primary:hover:not(:disabled) { background: var(--home-primary-dark); }
+.adm-btn-lg { padding: 0.55rem 1.3rem; font-size: 0.875rem; }
+.adm-inline-error { color: #a12626; font-size: 0.75rem; font-weight: 700; width: 100%; }
+
+/* ---------- tables (students / teachers) ---------- */
+.adm-panel {
+  margin-top: 1.75rem;
+  background: var(--home-card);
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-2xl);
+  overflow: hidden;
+}
+.adm-panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--home-border);
+}
+.adm-panel-head .cat-search { flex: 1 1 260px; margin: 0; }
+.adm-panel-head .vid-select { width: auto; }
+.adm-table-wrap { overflow-x: auto; }
+.adm-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.adm-table th {
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--home-muted);
+  background: var(--home-bg);
+  white-space: nowrap;
+}
+.adm-table td {
+  padding: 0.8rem 1.25rem;
+  border-top: 1px solid var(--home-border);
+  font-weight: 600;
+  vertical-align: middle;
+}
+.adm-table tbody tr:hover { background: #fbfdff; }
+.adm-num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.adm-name { font-weight: 800; color: var(--home-ink); }
+.adm-link { color: var(--home-primary-dark); font-weight: 800; text-decoration: none; }
+.adm-link:hover { text-decoration: underline; }
+.adm-sub { display: block; font-size: 0.75rem; font-weight: 600; color: var(--home-muted); margin-top: 2px; }
+.adm-mono { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-weight: 700; }
+.adm-meter {
+  margin-top: 0.3rem;
+  height: 6px;
+  min-width: 90px;
+  border-radius: 999px;
+  background: var(--home-wash-blue);
+  overflow: hidden;
+}
+.adm-meter > i { display: block; height: 100%; background: var(--home-primary); border-radius: 999px; }
+.adm-empty-row td { text-align: center; padding: 2.5rem; color: var(--home-muted); }
+.adm-table-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border-top: 2px solid var(--home-border);
+  color: var(--home-muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ---------- detail pages ---------- */
+.adm-detail {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 960px) { .adm-detail { grid-template-columns: 1fr; } }
+.adm-box {
+  background: var(--home-card);
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-2xl);
+  padding: 1.25rem 1.4rem;
+}
+.adm-box-title {
+  font-family: var(--home-font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 0 0 0.9rem;
+}
+.adm-player {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--home-radius-md);
+  background: #0b1220;
+}
+.adm-pdf { width: 100%; height: 78vh; border: 0; border-radius: var(--home-radius-md); background: var(--home-bg); }
+.adm-preview-empty {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--home-radius-md);
+  background: var(--home-wash-blue);
+  color: var(--home-ink);
+  font-weight: 700;
+  padding: 1rem;
+}
+.adm-kv { display: grid; grid-template-columns: 110px 1fr; gap: 0.6rem 0.8rem; margin: 0; font-size: 0.9rem; }
+.adm-kv dt { color: var(--home-muted); font-weight: 700; }
+.adm-kv dd { margin: 0; font-weight: 700; word-break: break-word; }
+.adm-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+.adm-note {
+  margin: 0.9rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--home-radius-sm);
+  background: #fdecec;
+  color: #7a1d1d;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.adm-pin { display: inline-flex; align-items: center; gap: 0.5rem; }
+.adm-pin .adm-mono { font-size: 1.05rem; letter-spacing: 0.15em; }
+
+/* ---------- credentials box after creating an account ---------- */
+.adm-creds {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--home-radius-md);
+  background: #eafaf3;
+  border: 2px solid var(--home-mint);
+  color: #0d4d33;
+  font-weight: 700;
+}
+.adm-creds pre {
+  margin: 0.6rem 0 0.8rem;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+/* ---------- login ---------- */
+.adm-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: var(--home-gradient-hero);
+}
+.adm-login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--home-card);
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-3xl);
+  box-shadow: var(--home-shadow-pop);
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+.adm-login-card .navbar-brand { justify-content: center; margin-bottom: 1.25rem; }
+.adm-login-card .ens-input { margin: 0.5rem 0 1rem; text-align: center; }
+.adm-login-card .ens-publish-btn { width: 100%; }
+
+/* ---------- fixes on top of the platform styles ---------- */
+a.ens-new-video-btn,
+a.ens-profile-btn,
+a.vid-btn-secondary { text-decoration: none; }
+
+.adm-table th.adm-num { text-align: right; }
+
+.adm-card-actions {
+  display: flex;
+  gap: 0.4rem;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.adm-card-actions .adm-btn { flex: 1; }
+
+@media (max-width: 719px) {
+  .adm-stats-4 { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .adm-stats-4 .ens-stat-card { padding: 1rem; }
+  .adm-stats-4 .ens-stat-value { font-size: 1.6rem; }
+}
+
+/* Mobile navbar: logo + logout on row 1, tabs on row 2 (same order scheme as the platform) */
+@media (max-width: 640px) {
+  .navbar-logout-btn { order: 2; margin-left: auto; padding: 0.4rem 0.9rem; }
+}
+@media (max-width: 480px) {
+  .adm-badge { font-size: 0.6rem; padding: 0.1rem 0.45rem; }
+  .navbar-logout-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
+}
