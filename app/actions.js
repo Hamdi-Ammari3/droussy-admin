@@ -6,7 +6,7 @@ import { refresh } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { SESSION_COOKIE, SESSION_MAX_AGE, createSessionValue } from "@/lib/session";
 import { publishContent, rejectContent } from "@/lib/data/content";
-import { createStudent, createTeacher } from "@/lib/data/users";
+import { createStudent, createTeacher, activatePaid, startTrial } from "@/lib/data/users";
 
 export async function loginAction(_prev, formData) {
   const password = String(formData.get("password") || "");
@@ -62,10 +62,34 @@ export async function createAccountAction(_prev, formData) {
     const account =
       role === "teacher"
         ? await createTeacher({ name, phone, sex: String(formData.get("sex") || "man") })
-        : await createStudent({ name, phone });
+        : await createStudent({ name, phone, plan: formData.get("plan") === "trial" ? "trial" : "paid" });
     refresh();
     return { account: { ...account, role } };
   } catch (err) {
     return { error: err.message || "Erreur lors de la création du compte." };
+  }
+}
+
+/** Trial → paid, or activate / renew a 12-month subscription. */
+export async function activatePaidAction(uid) {
+  await requireAdmin();
+  try {
+    const res = await activatePaid(uid);
+    refresh();
+    return { ok: true, ...res };
+  } catch (err) {
+    return { error: err.message };
+  }
+}
+
+/** One-time 7-day / 30-document free trial for an existing account. */
+export async function startTrialAction(uid) {
+  await requireAdmin();
+  try {
+    const res = await startTrial(uid);
+    refresh();
+    return { ok: true, ...res };
+  } catch (err) {
+    return { error: err.message };
   }
 }

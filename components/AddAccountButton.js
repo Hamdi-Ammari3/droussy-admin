@@ -47,7 +47,11 @@ function AccountModal({ role, onClose, onAnother }) {
         `Nom : ${acc.name}`,
         `Téléphone : ${acc.phone}`,
         `Code : ${acc.pin}`,
-        acc.endsAt ? `Abonnement valable jusqu'au ${fmt(acc.endsAt)}` : null,
+        acc.plan === "trial"
+          ? `Essai gratuit : ${acc.quota} documents jusqu'au ${fmt(acc.endsAt)}`
+          : acc.endsAt
+            ? `Abonnement valable jusqu'au ${fmt(acc.endsAt)}`
+            : null,
       ]
         .filter(Boolean)
         .join("\n")
@@ -64,7 +68,7 @@ function AccountModal({ role, onClose, onAnother }) {
             <p className="ens-modal-desc">
               {teacher
                 ? "Le compte est créé avec un code à 4 chiffres. L'enseignant se connecte avec son numéro et ce code."
-                : "Abonnement de 12 mois inclus (tous les niveaux, toutes les matières). L'élève se connecte avec son numéro et ce code."}
+                : "L'élève se connecte avec son numéro et un code à 4 chiffres. Tous les niveaux et toutes les matières."}
             </p>
           </div>
           <button type="button" onClick={onClose} disabled={pending} className="ens-modal-close" aria-label="Fermer">
@@ -109,6 +113,27 @@ function AccountModal({ role, onClose, onAnother }) {
               <input name="phone" required inputMode="numeric" maxLength={20} className="ens-input" placeholder="Ex : 99536298" />
               <p className="ens-field-hint">8 chiffres. +216 / 00216 accepté, il est retiré automatiquement.</p>
             </label>
+            {!teacher && (
+              <fieldset className="ens-field adm-plan-field">
+                <span className="ens-field-label">Formule</span>
+                <div className="adm-plan-options">
+                  <label className="adm-plan-option">
+                    <input type="radio" name="plan" value="trial" defaultChecked />
+                    <span>
+                      <strong>🧪 Essai gratuit</strong>
+                      <small>7 jours · 30 documents · vues non payées aux enseignants</small>
+                    </span>
+                  </label>
+                  <label className="adm-plan-option">
+                    <input type="radio" name="plan" value="paid" />
+                    <span>
+                      <strong>✅ Abonnement payé</strong>
+                      <small>12 mois · tous les documents</small>
+                    </span>
+                  </label>
+                </div>
+              </fieldset>
+            )}
             {teacher && (
               <label className="ens-field">
                 <span className="ens-field-label">Civilité</span>

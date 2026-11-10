@@ -297,3 +297,24 @@ a.vid-btn-secondary { text-decoration: none; }
   .adm-badge { font-size: 0.6rem; padding: 0.1rem 0.45rem; }
   .navbar-logout-btn { padding: 0.35rem 0.75rem; font-size: 0.8rem; }
 }
+
+/* ---------- free trial ---------- */
+.adm-chip-trial { background: #efe7ff; color: #5b2bb5; }
+.adm-chip-trial-end { background: #fde7f3; color: #9b1d5d; }
+.adm-row-actions { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.adm-plan-field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.adm-plan-options { display: grid; gap: 0.5rem; }
+.adm-plan-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.85rem;
+  border: 2px solid var(--home-border);
+  border-radius: var(--home-radius-md);
+  cursor: pointer;
+  background: var(--home-card);
+}
+.adm-plan-option:has(input:checked) { border-color: var(--home-primary); background: var(--home-wash-blue); }
+.adm-plan-option input { margin-top: 0.2rem; accent-color: var(--home-primary); }
+.adm-plan-option strong { display: block; font-weight: 800; color: var(--home-ink); }
+.adm-plan-option small { display: block; color: var(--home-muted); font-weight: 600; font-size: 0.78rem; margin-top: 2px; }
